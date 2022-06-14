@@ -1,2 +1,50 @@
-<h1>andycodev</h1>
-<p>usuario works!</p>
+
+<div class="container mt-5">
+    <h1>Listado de usuarios ({{usuarios.length}})</h1>
+    <div class="row">
+        <form [formGroup]="form" (ngSubmit)="master()">
+            <div class="sm-12">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Escribir nombres">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" formControlName="email" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" formControlName="password" placeholder="Escribir contraseña">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span *ngIf="form.value.id">Editar</span>
+                    <span *ngIf="!form.value.id">Guardar</span>
+                </button>
+            </div>
+        </form>
+        <table class="mt-5 table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contraseña</th>
+                <th scope="col" colspan="2">Opciones</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr *ngFor="let usuario of usuarios">
+                <th scope="row">1</th>
+                <td>{{usuario.name}}</td>
+                <td>{{usuario.email}}</td>
+                <td>@{{usuario.password}}</td>
+                <td>
+                    <span (click)="getUser(usuario.id)"><i class="bi bi-pencil-square"></i></span>
+                </td>
+                <td>
+                    <span (click)="deleteUser(usuario.id)"><i class="bi bi-x-circle"></i></span>
+                </td>
+            </tbody>
+          </table>
+    </div>
+</div>
