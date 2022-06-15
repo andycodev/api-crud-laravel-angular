@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from './usuario.service';
 import { Usuario } from './usuario';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-usuario',
@@ -12,9 +13,8 @@ export class UsuarioComponent implements OnInit {
   usuarios: Usuario[] = [];
   form: FormGroup = this.fb.group({
     id: [''],
-    name: ['' /* [Validators.required] */],
-    email: [''],
-    password: [''],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required]],
   });
 
   constructor(
@@ -24,7 +24,6 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.form);
-
     this.getUsers();
   }
 
@@ -41,8 +40,7 @@ export class UsuarioComponent implements OnInit {
       this.form.patchValue({
         id: resp.id,
         name: resp.name,
-        email: resp.email,
-        password: resp.email,
+        email: resp.email
       });
     });
   }
